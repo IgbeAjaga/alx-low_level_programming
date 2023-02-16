@@ -1,8 +1,8 @@
 #include <stdio.h>
 /**
- * main - entry point
+ * main - Entry point
  *
- * returnimg 0 always successful
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
