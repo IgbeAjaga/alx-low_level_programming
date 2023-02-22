@@ -14,7 +14,7 @@ int main(void)
 	unsigned long int l = 1000000000;
 	unsigned long int bef1;
 	unsigned long int bef2;
-	unsigned long int aft1
+	unsigned long int aft1;
 	unsigned long int aft2;
 
 	printf("%lu", bef);
