@@ -1,1 +1,1 @@
-this is c programming
+0x07. C - Even more pointers, arrays and strings
