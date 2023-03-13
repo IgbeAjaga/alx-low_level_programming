@@ -1,4 +1,4 @@
-#include "notrebloh.h"
+#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,7 +9,7 @@
  * Return: arguments as strings
  */
 
-char *argstostr(int ac, char **av)
+char *argstostr(int ac, char *av[])
 {
 	int size, count, count1, count2 = 0;
 	char *ptr;
