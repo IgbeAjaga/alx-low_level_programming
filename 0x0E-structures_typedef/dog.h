@@ -10,6 +10,7 @@
 	 *
 	 * Description: The attributes of a dog
 	 */
+
 	struct dog
 	{
 		char *name;
