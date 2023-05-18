@@ -1,7 +1,7 @@
 #include "lists.h"
 #include <stdio.h>
 /**
- * dlistint_len - the number of elements in a linked list.
+ * dlistint_len - the number of elements in a list.
  * @h: first node in the list
  *
  * Description: doubly linked list node structure
