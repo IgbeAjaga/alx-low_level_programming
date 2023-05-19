@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 /**
- * delete_dnodeint_at_index - deletes the node at index index of a linked list
+ * delete_dnodeint_at_index - deletes the node at index of a linked list
  * @head: first node
  * @index: list index
  *
@@ -13,6 +13,7 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
 	dlistint_t *current;
 	unsigned int count = 0;
+
 	if (head == NULL || *head == NULL)
 		return (-1);
 	current = *head;
