@@ -3,31 +3,30 @@
 #include <stddef.h>
 
 /**
- * hash_table_create - Creates a hash table
- * @size: The size of the array
+ * hash_table_create - creates a hash table
+ * @size: size of the array
  *
- * Return: A pointer to the newly created hash table,
- *         or NULL if something went wrong.
+ * Return: pointer to the newly created hash table, or NULL if it fails
  */
 hash_table_t *hash_table_create(unsigned long int size)
 {
-    hash_table_t *ht;
-    unsigned long int i;
+	hash_table_t *hash_table;
+	unsigned long int i;
 
-    ht = malloc(sizeof(hash_table_t));
-    if (ht == NULL)
-        return NULL;
+	hash_table = malloc(sizeof(hash_table_t));
+	if (hash_table == NULL)
+		return (NULL);
 
-    ht->array = malloc(sizeof(hash_node_t *) * size);
-    if (ht->array == NULL)
-    {
-        free(ht);
-        return NULL;
-    }
+	hash_table->size = size;
+	hash_table->array = malloc(sizeof(hash_node_t *) * size);
+	if (hash_table->array == NULL)
+	{
+		free(hash_table);
+		return (NULL);
+	}
 
-    ht->size = size;
-    for (i = 0; i < size; i++)
-        ht->array[i] = NULL;
+	for (i = 0; i < size; i++)
+		hash_table->array[i] = NULL;
 
-    return ht;
+	return (hash_table);
 }
