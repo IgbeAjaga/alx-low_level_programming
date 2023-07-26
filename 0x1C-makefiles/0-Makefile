@@ -1,2 +1,17 @@
-all: main.c school.c
-    gcc main.c school.c -o school
+CC = gcc
+SRC = main.c school.c
+OBJ = $(SRC:.c=.o)
+NAME = school
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+    $(CC) $(OBJ) -o $(NAME)
+
+%.o: %.c main.h
+    $(CC) -c $< -o $@
+
+clean:
+    rm -f *~ $(NAME) $(OBJ)
+
+.PHONY: all clean
