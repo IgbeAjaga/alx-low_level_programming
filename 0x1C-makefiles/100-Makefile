@@ -1,0 +1,55 @@
+# Makefile 100
+# name of the executable: school
+# rules: all, clean, fclean, oclean, re
+# variables: CC, SRC, OBJ, NAME, RM, CFLAGS
+# Your Makefile should work even if there is a file in the folder that has the same name as one of your rule
+
+# Compiler
+CC = gcc
+
+# Source files
+SRC = main.c school.c
+
+# Object files
+OBJ = $(SRC:.c=.o)
+
+# Executable name
+NAME = school
+
+# Program to delete files
+RM = rm -f
+
+# Compiler flags
+CFLAGS = -Wall -Werror -Wextra -pedantic
+
+# all rule
+all: $(NAME)
+
+# Rule to build the executable
+$(NAME): $(OBJ)
+ifeq ($(wildcard m.h),)
+	@echo "m.h not found. Cannot compile."
+else
+	$(CC) $(OBJ) -o $(NAME) $(CFLAGS)
+endif
+
+# Rule to compile source files into object files
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# clean rule
+clean:
+	$(RM) *~ $(NAME)
+	$(RM) $(OBJ)
+
+# oclean rule
+oclean:
+	$(RM) $(OBJ)
+
+# fclean rule
+fclean: clean oclean
+
+# re rule
+re: fclean all
+
+.PHONY: all clean oclean fclean re
