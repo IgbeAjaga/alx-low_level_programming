@@ -6,8 +6,8 @@ that returns the perimeter of the island described in grid
 def island_perimeter(grid):
     """Returns the perimeter of the island described in grid"""
     perimeter = 0
-    num_rows = len(grid)
-    num_cols = len(grid[0])
+    num_rows = len(grid) - 1
+    num_cols = len(grid[0]) - 1
 
     for i, row in enumerate(grid):
         for j, cell in enumerate(row):
