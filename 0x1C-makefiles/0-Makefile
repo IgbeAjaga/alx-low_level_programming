@@ -1,5 +1,6 @@
 # name of the executable: school
 # rules: all
+# variables: none
 
-all:
+all: main.c school.c
     gcc main.c school.c -o school
