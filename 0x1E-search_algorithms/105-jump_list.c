@@ -1,36 +1,49 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h> // For the sqrt function
 #include "search_algos.h"
+#include <math.h>
 
+/**
+ * jump_list - Jump search algorithm
+ * @list: A pointer to the head of the list to search in
+ * @size: the number of nodes in list
+ * @value: value to search for
+ * Return: index of the number in the array
+ */
 listint_t *jump_list(listint_t *list, size_t size, int value)
 {
-    size_t step = sqrt(size);
-    listint_t *current = list;
-    listint_t *prev = NULL;
+	size_t index, i, j;
+	listint_t *prev;
 
-    if (list == NULL)
-        return NULL;
+	if (list == NULL || size == 0)
+		return (NULL);
 
-    while (current && current->n < value)
-    {
-        prev = current;
-        for (size_t i = 0; current->next && i < step; i++)
-            current = current->next;
+	j = (size_t)sqrt((double)size);
+	index = 0;
+	i = 0;
 
-        printf("Value checked at index [%lu] = [%d]\n", current->index, current->n);
-    }
+	do {
+		prev = list;
+		i++;
+		index = i * j;
 
-    printf("Value found between indexes [%lu] and [%lu]\n", prev->index, current->index);
+		while (list->next && list->index < index)
+			list = list->next;
 
-    current = prev;
-    while (current && current->n <= value)
-    {
-        printf("Value checked at index [%lu] = [%d]\n", current->index, current->n);
-        if (current->n == value)
-            return current;
-        current = current->next;
-    }
+		if (list->next == NULL && index != list->index)
+			index = list->index;
 
-    return NULL;
+		printf("Value checked at index [%d] = [%d]\n", (int)index, list->n);
+
+	} while (index < size && list->next && list->n < value);
+
+	printf("Value found between indexes ");
+	printf("[%d] and [%d]\n", (int)prev->index, (int)list->index);
+
+	for (; prev && prev->index <= list->index; prev = prev->next)
+	{
+		printf("Value checked at index [%d] = [%d]\n", (int)prev->index, prev->n);
+		if (prev->n == value)
+			return (prev);
+	}
+
+	return (NULL);
 }
