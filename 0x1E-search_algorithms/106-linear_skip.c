@@ -1,34 +1,44 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h> // For the sqrt function
 #include "search_algos.h"
 
+/**
+ * linear_skip - searches for a value in a sorted skip list of integers
+ * @list: a pointer to the head of the skip list to search in
+ * @value: the value to search for
+ * Return: index of the number in the array
+ */
 skiplist_t *linear_skip(skiplist_t *list, int value)
 {
-    if (list == NULL)
-        return NULL;
+	skiplist_t *res;
 
-    skiplist_t *current = list;
-    skiplist_t *express = list;
+	if (list == NULL)
+		return (NULL);
 
-    while (express && express->n < value)
-    {
-        current = express;
-        express = express->express;
+	res = list;
 
-        if (express != NULL)
-            printf("Value checked at index [%lu] = [%d]\n", express->index, express->n);
-    }
+	do {
+		list = res;
+		res = res->express;
+		printf("Value checked at index ");
+		printf("[%d] = [%d]\n", (int)res->index, res->n);
+	} while (res->express && res->n < value);
 
-    printf("Value found between indexes [%lu] and [%lu]\n", current->index, express->index);
+	if (res->express == NULL)
+	{
+		list = res;
+		while (res->next)
+			res = res->next;
+	}
 
-    while (current && current->n <= value)
-    {
-        printf("Value checked at index [%lu] = [%d]\n", current->index, current->n);
-        if (current->n == value)
-            return current;
-        current = current->next;
-    }
+	printf("Value found between indexes ");
+	printf("[%d] and [%d]\n", (int)list->index, (int)res->index);
 
-    return NULL;
+	while (list != res->next)
+	{
+		printf("Value checked at index [%d] = [%d]\n", (int)list->index, list->n);
+		if (list->n == value)
+			return (list);
+		list = list->next;
+	}
+
+	return (NULL);
 }
