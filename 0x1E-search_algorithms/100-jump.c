@@ -1,36 +1,42 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h> // For sqrt function
 #include "search_algos.h"
+#include <math.h>
 
+/**
+ * jump_search - search algorithm
+ * @array: input array
+ * @size: size of the elements in the array
+ * @value: value to search for
+ * Return: index of the number in the array
+ */
 int jump_search(int *array, size_t size, int value)
 {
-    if (array == NULL)
-        return -1;
+	int index, i, j, prev;
 
-    size_t step = sqrt(size); // Jump step size
-    size_t left = 0;
-    size_t right = 0;
+	if (array == NULL || size == 0)
+		return (-1);
 
-    while (right < size && array[right] < value)
-    {
-        left = right;
-        right += step;
+	i = (int)sqrt((double)size);
+	j = 0;
+	prev = index = 0;
 
-        printf("Value checked array[%lu] = [%d]\n", right, array[right]);
+	do {
+		printf("Value checked array[%d] = [%d]\n", index, array[index]);
 
-        if (right >= size)
-            break;
-    }
+		if (array[index] == value)
+			return (index);
+		j++;
+		prev = index;
+		index = j * i;
+	} while (index < (int)size && array[index] < value);
 
-    printf("Value found between indexes [%lu] and [%lu]\n", left, right);
+	printf("Value found between indexes [%d] and [%d]\n", prev, index);
 
-    for (size_t i = left; i <= right && i < size; i++)
-    {
-        printf("Value checked array[%lu] = [%d]\n", i, array[i]);
-        if (array[i] == value)
-            return i;
-    }
+	for (; prev <= index && prev < (int)size; prev++)
+	{
+		printf("Value checked array[%d] = [%d]\n", prev, array[prev]);
+		if (array[prev] == value)
+			return (prev);
+	}
 
-    return -1; // Value not found
+	return (-1);
 }
